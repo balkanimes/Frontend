@@ -1,18 +1,24 @@
 
+
 const routes = [
   {
+    name: 'home',
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ]
+    component: () => import('pages/Home.vue')
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
+  {
+    path: '/pipeline',
+    name: 'pipelines',
+    component: () => import('pages/Pipelines.vue')
+  },
+  {
+    path: '/pipeline/:id',
+    name: 'pipeline',
+    component: () => import('pages/Pipeline.vue')
+  },
   {
     path: '*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('pages/Error404.vue'),
   }
 ]
 

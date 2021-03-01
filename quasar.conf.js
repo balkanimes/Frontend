@@ -46,6 +46,7 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      gzip: true,
       chainWebpack (chain, { isServer, isClient }) {
         chain.module.rule('vue')
           .use('vue-loader')
@@ -92,12 +93,14 @@ cfg.module.rules.push({
       port: 8080,
       open: true // opens browser window automatically
     },
+    devtool: 'source-map',
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
       config: {},
+      cssAddon: true,
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -112,7 +115,7 @@ cfg.module.rules.push({
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ['Notify']
     },
 
     // animations: 'all', // --- includes all animations

@@ -1,10 +1,17 @@
 <template>
   <div id="q-app">
-    <router-view />
+    <MainLayout>
+    </MainLayout>
   </div>
 </template>
 <script>
+import MainLayout from './layouts/MainLayout.vue'
+
 export default {
-  name: 'App'
+  components: { MainLayout },
+  name: 'App',
+  mounted: function () {
+    this.$q.dark.set(true)
+  }
 }
 </script>
