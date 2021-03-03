@@ -1,0 +1,48 @@
+---
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+  - name: deploy
+    image: node:14-buster-slim
+    commands:
+      - npm install -g @quasar/cli
+      - cd /drone/src && npm i --save-dev && quasar build
+      - cp -R /drone/src/dist/spa/* /drone/prod/
+
+    volumes:
+      - name: prod
+        path: /drone/prod
+
+  - name: discord_notification
+    image: appleboy/drone-discord
+    when:
+      status:
+        - success
+        - failure
+    settings:
+      webhook_id:
+        from_secret: webhook_id
+      webhook_token:
+        from_secret: webhook_token
+      message: >
+        {{#success build.status}}
+        ✅ Deployment succeeded. 💾 Build #{{build.number}} for `{{repo.name}}`.
+        {{else}}
+        ❌ Deployment failed. 💾 Build #{{build.number}} for `{{repo.name}}`.
+        {{/success}}
+
+volumes:
+  - name: prod
+    host:
+      path: /app/docker/data/Server/www/html/projets4
+
+trigger:
+  event:
+  - push
+---
+kind: signature
+hmac: 9baeb4098e3c7069e4bb9660693779851e783a6a181b7f12fbaeeae70324c998
+
+...
