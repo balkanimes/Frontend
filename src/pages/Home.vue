@@ -23,10 +23,6 @@
 .mainImg {
     height: 20vh;
 }
-.link {
-    text-decoration: none;
-    color: white;
-}
 </style>
 
 <script>

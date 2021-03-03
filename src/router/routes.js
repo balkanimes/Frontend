@@ -12,6 +12,11 @@ const routes = [
     component: () => import('pages/Pipelines.vue')
   },
   {
+    path: '/pipeline/new',
+    name: 'new_pipeline',
+    component: () => import('pages/NewPipeline.vue')
+  },
+  {
     path: '/pipeline/:id',
     name: 'pipeline',
     component: () => import('pages/Pipeline.vue')
