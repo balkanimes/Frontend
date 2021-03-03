@@ -2,7 +2,7 @@
   <q-page>
   <div class="q-mt-md row wrap justify-center items-center">
     <q-card class="col-xs-10 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-      <img src="https://cdn.quasar.dev/img/parallax2.jpg" class="mainImg">
+      <img src="landscape.png" class="mainImg">
 
       <q-card-section>
         <div class="text-h5">Balkanimes Downloader</div>

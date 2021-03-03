@@ -43,7 +43,7 @@
               <q-icon name="settings_ethernet" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Pipeline</q-item-label>
+              <q-item-label>Pipelines</q-item-label>
             </q-item-section>
           </q-item>
       </q-list>
