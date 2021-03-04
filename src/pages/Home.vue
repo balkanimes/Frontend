@@ -12,8 +12,8 @@
       </q-card-section>
     </q-card>
     <div class="col-xs-10 col-sm-5 col-md-4 col-lg-3 col-xl-3 q-ml-xs-0 q-ml-sm-xl q-mt-xs-lg q-mt-sm-sm">
-        <statCard icon="settings_ethernet" title="Pipelines" :value="pipelines.length" color="primary" class="q-mb-lg"/>
-        <statCard icon="assessment" title="Entries" :value="entries.length" color="primary"/>
+        <statCard icon="settings_ethernet" title="Pipelines" :value="pipelines.length" color="primary" class="q-mb-lg" v-if="pipelines"/>
+        <statCard icon="assessment" title="Entries" :value="entries.length" color="primary" v-if="entries"/>
     </div>
     </div>
   </q-page>
