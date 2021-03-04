@@ -36,7 +36,7 @@ export default Vue.extend({
       if (this.config !== null && this.pipelineName !== '' && this.providerName !== '') {
         this.$apollo.mutate({
           mutation : gql`
-            mutation ($id: Int!, $conf: PipelineInput!) {
+            mutation ($id: Int, $conf: PipelineInput!) {
               pipeline(id: $id, conf: $conf)
             }`,
           variables: {
@@ -56,7 +56,7 @@ export default Vue.extend({
               color: 'teal'
             })
             if (this.newPipeline) {
-              this.$router.push({ name: 'pipeline', params: { id: this.pipelineID } })
+              this.$router.push({ name: 'pipelines' })
             }
           } else {
             this.$q.notify({
@@ -171,24 +171,8 @@ export default Vue.extend({
   mounted () {
     this.newPipeline = this.$route.name === 'new_pipeline'
     if (this.newPipeline) {
-      this.$apollo.query({
-        query: gql`
-          query {
-            pipelines {
-              id
-            }
-          }`
-      }).then((resp) => {
-        console.log()
-        let max = -1
-        resp.data.pipelines.forEach(p => {
-          if (p.id > max) {
-            max = p.id
-          }
-          this.pipelineID = max + 1
-          this.loadSchema(true)
-        });
-      })
+      this.pipelineID = undefined
+      this.loadSchema(true)
     } else {
       this.pipelineID = parseInt(this.$route.params.id)
       this.loadData()
