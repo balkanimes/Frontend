@@ -33,15 +33,19 @@ export default defineComponent({
   methods: {
     change: function () {
       let conf = {}
+      let ok = true
       this.schema.forEach(s => {
         if (this.validation[s.name] || !(s.required ?? true)) {
           conf[s.name] = this.config[s.name]
         } else {
-          this.$emit('config', null)
-          return
+          ok = false
         }
       })
-      this.$emit('config', conf)
+      if (ok) {
+        this.$emit('config', conf)
+      } else {
+        this.$emit('config', null)
+      }
     },
     input: function (name, data) {
       this.config[name] = data[0]

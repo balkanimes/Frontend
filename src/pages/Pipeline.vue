@@ -30,8 +30,45 @@ export default Vue.extend({
   },
   methods: {
     save: function () {
-      console.log('save')
-      console.log(this.config)
+      if (this.config !== null && this.pipelineName !== '') {
+        this.$apollo.mutate({
+          mutation : gql`
+            mutation ($id: Int!, $conf: PipelineInput!) {
+              pipeline(id: $id, conf: $conf)
+            }`,
+          variables: {
+            id: parseInt(this.$route.params.id),
+            conf: {
+              name: this.pipelineName,
+              provider: this.providerName,
+              config: this.config
+            }
+          }
+        }).then((resp) => { 
+          if (resp.data.pipeline) {
+            this.$q.notify({
+              message: 'Success',
+              icon: 'done',
+              position: 'bottom-left',
+              color: 'teal'
+            })
+          } else {
+            this.$q.notify({
+              message: 'Error',
+              icon: 'error',
+              position: 'bottom-left',
+              color: 'red'
+            })
+          }
+        })
+      } else {
+        this.$q.notify({
+          message: 'Invalid Fields',
+          icon: 'error',
+          position: 'bottom-left',
+          color: 'red'
+        })
+      }
     }
   },
   mounted () {
