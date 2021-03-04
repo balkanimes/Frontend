@@ -6,6 +6,7 @@
         <providerSelect v-model="providerName" class="q-mb-xl"/>
         <configCard :data="pipeline.config" :schema="schema" v-if="schema !== null" @config="(data) => { this.config = data }"/>
         <q-btn color="secondary" class="full-width q-mt-xl" label="Save" @click="save"/>
+        <q-btn color="red" class="full-width q-mt-xl" label="Delete Pipeline" @click="del"/>
       </q-card>
   </q-page>
 </template>
@@ -69,6 +70,34 @@ export default Vue.extend({
           color: 'red'
         })
       }
+    },
+    del: function () {
+      this.$apollo.mutate({
+        mutation : gql`
+          mutation ($id: Int!) {
+            deletePipeline(id: $id)
+          }`,
+        variables: {
+          id: parseInt(this.$route.params.id)
+        }
+      }).then((resp) => {
+        if (resp.data.deletePipeline) {
+          this.$q.notify({
+            message: 'Success',
+            icon: 'done',
+            position: 'bottom-left',
+            color: 'teal'
+          })
+          this.$router.push({ name: 'pipelines' })
+        } else {
+          this.$q.notify({
+            message: 'Error',
+            icon: 'error',
+            position: 'bottom-left',
+            color: 'red'
+          })
+        }
+      })
     }
   },
   mounted () {
