@@ -46,6 +46,15 @@
               <q-item-label>Pipelines</q-item-label>
             </q-item-section>
           </q-item>
+          
+          <q-item clickable :to="{name: 'entries'}">
+            <q-item-section avatar>
+              <q-icon name="assessment" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Entries</q-item-label>
+            </q-item-section>
+          </q-item>
       </q-list>
     </q-drawer>
 

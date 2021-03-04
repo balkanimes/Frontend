@@ -28,8 +28,7 @@ export default defineComponent({
     }
   },
   mounted () {
-    console.log(this.data)
-    // this.change()
+    this.change()
   },
   methods: {
     change: function () {

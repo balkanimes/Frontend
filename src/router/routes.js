@@ -22,6 +22,21 @@ const routes = [
     component: () => import('pages/Pipeline.vue')
   },
   {
+    path: '/entry',
+    name: 'entries',
+    component: () => import('pages/Entries.vue')
+  },
+  {
+    path: '/entry/new',
+    name: 'new_entry',
+    component: () => import('pages/Entry.vue')
+  },
+  {
+    path: '/entry/:id',
+    name: 'entry',
+    component: () => import('pages/Entry.vue')
+  },
+  {
     path: '*',
     component: () => import('pages/Error404.vue'),
   }
