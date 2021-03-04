@@ -4,7 +4,7 @@
         <div v-for="s in schema" :key="s.name">
           <inputString v-if="s.type === 'string'" :value="data[s.name]" :schema="s" @input="data => input(s.name, data)"/>
           <inputBool v-if="s.type === 'boolean'" :value="data[s.name]" :schema="s" @input="data => input(s.name, data)"/>
-          <inputNumber v-if="s.type === 'float'" :value="data[s.name]" :schema="s" @input="data => input(s.name, data)" :float="true"/>
+          <inputNumber v-if="s.type === 'float' || s.type === 'number'" :value="data[s.name]" :schema="s" @input="data => input(s.name, data)" :float="true"/>
           <inputNumber v-if="s.type === 'integer'" :value="data[s.name]" :schema="s" @input="data => input(s.name, data)" :float="false"/>
         </div>
       </q-form>
@@ -28,7 +28,8 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.change()
+    console.log(this.data)
+    // this.change()
   },
   methods: {
     change: function () {
